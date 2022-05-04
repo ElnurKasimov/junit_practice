@@ -1,2 +1,2 @@
-# junit_test_practice
-test coverage of task 'consumer basket'
+# junit_tests_practice
+test's coverage of task 'consumer basket'
