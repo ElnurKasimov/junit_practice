@@ -1,8 +1,11 @@
+import lombok.Data;
+
+@Data
 public class Product {
-    String name;
-    int promotionalItemQuality;
-    double price;
-    double promotionalPrice;
+    private Character name;
+    private int promotionalItemQuantity;
+    private double price;
+    private double promotionalPrice;
 
     public static class Builder {
         private static Product newProduct;
@@ -11,13 +14,13 @@ public class Product {
             newProduct = new Product();
         }
 
-        public Product.Builder withName(String name) {
+        public Product.Builder withName(Character name) {
             newProduct.name = name;
             return this;
         }
 
-        public Product.Builder promotionalItemQuality(int quality) {
-            newProduct.promotionalItemQuality = quality;
+        public Product.Builder withPromotionalItemQuality(int quality) {
+            newProduct.promotionalItemQuantity = quality;
             return this;
         }
 
