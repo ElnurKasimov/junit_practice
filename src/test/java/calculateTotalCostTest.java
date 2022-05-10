@@ -60,7 +60,7 @@ public class calculateTotalCostTest {
     @Test
     public void testThatCalculateTotalCostReturns_PriceAndTreePromotionalPrice_For_AAAA() {
         double actual = shop.calculateTotalCost("AAAA");
-        double expected = 10.25;
+        double expected = 4.25;
         Assertions.assertEquals(expected, actual);
     }
 

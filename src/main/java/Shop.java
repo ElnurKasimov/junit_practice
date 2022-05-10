@@ -31,7 +31,7 @@ public class Shop {
         );
     }
 
-    public Product findProductByName (char name) {
+    public Product findProductByName (char name) throws  IllegalArgumentException, RuntimeException {
         if (!(name == 'A' || name == 'B' || name == 'C' || name == 'D'))
             throw new IllegalArgumentException("Name should be letter A, B, C, D only");
         boolean isExist = false;
@@ -58,11 +58,11 @@ public class Shop {
         Product current = this.findProductByName(name);
         if ( quantity > current.getPromotionalItemQuantity()) {
             result = current.getPrice()*(quantity-current.getPromotionalItemQuantity())
-                        +  current.getPromotionalPrice()*current.getPromotionalItemQuantity();
+                        +  current.getPromotionalPrice();
         } else  result = current.getPromotionalPrice()*quantity;
         return result;
     }
-    public char[] getProductsNames(String str) throws IllegalArgumentException {
+    public char[] getProductsNames(String str) {
         char[] rightLetter = {'A', 'B', 'C', 'D'};
         try {
             for (char c : str.toCharArray()) {
