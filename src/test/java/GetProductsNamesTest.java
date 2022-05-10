@@ -2,6 +2,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+//the name of a class can't be a verb it should be noun
 class GetProductsNamesTest {
     private Shop shop;
 

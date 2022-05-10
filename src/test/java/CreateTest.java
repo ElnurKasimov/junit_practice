@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+
+//the name of a class can't be a verb it should be noun
 public class CreateTest {
     private Shop shop;
 
@@ -17,6 +19,7 @@ public class CreateTest {
     public void testThatCreateInputNameHandledCorretly() {
           char[] invalidInputs = {
                   ' ',
+                  //
          //      'ф',     компилятор выдает  error: unclosed character literal. Поменял кодировку на UTF-8 - не помогло.
                            //  перепробовал кучу других кодировок - не помогает
                   'd',

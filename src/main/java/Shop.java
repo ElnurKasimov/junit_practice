@@ -3,10 +3,15 @@ import lombok.Data;
 import java.util.*;
 
 @Data
+
+//Actually... it's hard to read. Read about KISS principe
+// y
 public class Shop {
     private List<Product> products = new ArrayList<>();
 
 
+    // it's a vary bad practice use a i or v as variable names. It means nothing to me.
+    //we have to be able to understand what the variable contains from the name
     public void create(char a, int i, double v, double vPromotional) throws IllegalArgumentException {
         if (!(a == 'A' || a == 'B' || a == 'C' || a == 'D'))
             throw new IllegalArgumentException("Name should be letter A, B, C, D only");
@@ -14,12 +19,13 @@ public class Shop {
             throw new IllegalArgumentException("PromotionalItemQuality should be zero or integer positive number only");
         if (v <= 0)
             throw new IllegalArgumentException("Price should be positive number only");
-        if (vPromotional < 0)  throw new IllegalArgumentException("PromotionalPrice should be positive number only");
+        if (vPromotional < 0) throw new IllegalArgumentException("PromotionalPrice should be positive number only");
         if (vPromotional != 0) {
-            if (i == 0) throw new IllegalArgumentException("PromotionalPrice should be zero if  PromotionalItemQuality is equal zero");
+            if (i == 0)
+                throw new IllegalArgumentException("PromotionalPrice should be zero if  PromotionalItemQuality is equal zero");
         }
 
-        if (Math.abs(v-vPromotional) <= 0.01)
+        if (Math.abs(v - vPromotional) <= 0.01)
             throw new IllegalArgumentException("PromotionalPrice should different from Price more then 1 cent");
 
         for (Product product : this.getProducts()) {
@@ -31,13 +37,13 @@ public class Shop {
         );
     }
 
-    public Product findProductByName (char name) throws  IllegalArgumentException, RuntimeException {
+    public Product findProductByName(char name) throws IllegalArgumentException, RuntimeException {
         if (!(name == 'A' || name == 'B' || name == 'C' || name == 'D'))
             throw new IllegalArgumentException("Name should be letter A, B, C, D only");
         boolean isExist = false;
         ListIterator<Product> it = this.getProducts().listIterator();
-        int index=0;
-        while(it.hasNext()) {
+        int index = 0;
+        while (it.hasNext()) {
             if (it.next().getName() == name) {
                 index = it.previousIndex();
                 isExist = true;
@@ -45,34 +51,37 @@ public class Shop {
         }
         if (isExist) {
             return this.getProducts().get(index);
-        }
-        else throw new RuntimeException("Attemption find absent Product");
+        } else throw new RuntimeException("Attemption find absent Product");
     }
 
-    public double getProductCost(char name, int quantity) throws  IllegalArgumentException {
+    public double getProductCost(char name, int quantity) throws IllegalArgumentException {
         double result = 0;
         if (!(name == 'A' || name == 'B' || name == 'C' || name == 'D'))
             throw new IllegalArgumentException("Name should be letter A, B, C, D only");
         if (quantity < 0)
             throw new IllegalArgumentException("Quantity should be positive");
         Product current = this.findProductByName(name);
-        if ( quantity > current.getPromotionalItemQuantity()) {
-            result = current.getPrice()*(quantity-current.getPromotionalItemQuantity())
-                        +  current.getPromotionalPrice();
-        } else  result = current.getPromotionalPrice()*quantity;
+        if (quantity > current.getPromotionalItemQuantity()) {
+            result = current.getPrice() * (quantity - current.getPromotionalItemQuantity())
+                    + current.getPromotionalPrice();
+        } else result = current.getPromotionalPrice() * quantity;
         return result;
     }
+
     public char[] getProductsNames(String str) {
+        //looks like unused
         char[] rightLetter = {'A', 'B', 'C', 'D'};
         try {
             for (char c : str.toCharArray()) {
                 if (!(c == 'A' || c == 'B' || c == 'C' || c == 'D'))
                     throw new IllegalArgumentException("input should be letter A, B, C, D only");
             }
-            if (str.toCharArray().length == 0)  throw new IllegalArgumentException("input should be letter A, B, C, D only");
-        }
-        catch (Exception ex) {
-            throw new IllegalArgumentException ("input should be letter A, B, C, D only");
+            if (str.toCharArray().length == 0)
+                throw new IllegalArgumentException("input should be letter A, B, C, D only");
+        } catch (Exception ex) {
+            //I think it's a bad idea throwing an exception in the catch block
+            //If we are here it means an exception was already threw, it'll be nice to print stack trace or something similar
+            throw new IllegalArgumentException("input should be letter A, B, C, D only");
         }
         return str.toCharArray();
     }
@@ -101,12 +110,12 @@ public class Shop {
             }
         }
         for (int i = 0; i < 4; i++) {
-             quantityMap.put(productName[i], productQuantity[i]);
+            quantityMap.put(productName[i], productQuantity[i]);
         }
         return quantityMap;
     }
 
-    double calculateTotalCost( String str) throws IllegalArgumentException {
+    double calculateTotalCost(String str) throws IllegalArgumentException {
         double result = 0;
         char[] names = getProductsNames(str);
         Map<Character, Integer> products = getProductsQuantity(names);
@@ -118,7 +127,6 @@ public class Shop {
     }
 
 
-
     public static void main(String[] args) {
         Shop shop = new Shop();
         try {
@@ -128,8 +136,7 @@ public class Shop {
             shop.create('D', 0, 0.75, 0);
             double totalCost = shop.calculateTotalCost("ABCDABA");
             System.out.println(totalCost);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }

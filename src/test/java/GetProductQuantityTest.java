@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
+
+//the name of a class can't be a verb it should be noun
 public class GetProductQuantityTest {
     private Shop shop;
 

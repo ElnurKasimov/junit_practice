@@ -2,6 +2,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+//class should start only with capital letter
+//the name of a class can't be a verb it should be noun
 public class calculateTotalCostTest {
     private Shop shop;
 

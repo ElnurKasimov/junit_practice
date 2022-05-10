@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Iterator;
 
+//class should start only with capital letter
+//the name of a class can't be a verb it should be noun
 public class getProductCostTest {
     private Shop shop;
 

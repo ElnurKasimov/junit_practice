@@ -7,6 +7,7 @@ public class Product {
     private double price;
     private double promotionalPrice;
 
+    //if you already use lombok you can also use @Builder annotation
     public static class Builder {
         private static Product newProduct;
 
