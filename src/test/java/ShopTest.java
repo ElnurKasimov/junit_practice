@@ -2,26 +2,18 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
-//the name of a class can't be a verb it should be noun
-public class CreateTest {
+public class ShopTest {
     private Shop shop;
 
     @BeforeEach
     public void beforeEach() {
-        shop = new Shop();
+        shop = Shop.getInstance();
     }
 
       @Test
-    public void testThatCreateInputNameHandledCorretly() {
+    public void testingThatCreateInputNameHandledCorretly() {
           char[] invalidInputs = {
                   ' ',
-                  //
-         //      'ф',     компилятор выдает  error: unclosed character literal. Поменял кодировку на UTF-8 - не помогло.
-                           //  перепробовал кучу других кодировок - не помогает
                   'd',
                   'F',
                   '5',
@@ -34,14 +26,14 @@ public class CreateTest {
        }
 
     @Test
-    public void testThatCreateInputPromotionalQuantityHandledCorretly() {
+    public void testingThatCreateInputPromotionalQuantityHandledCorretly() {
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> shop.create('C', -1, 1., 2.));
     }
 
     @Test
-    public void testThatCreateInputPriceHandledCorretly() {
+    public void testingThatCreateInputPriceHandledCorretly() {
         double[] invalidInputs = {0., -1.};
         for (double v :invalidInputs) {
             Assertions.assertThrows(
@@ -51,7 +43,7 @@ public class CreateTest {
     }
 
     @Test
-    public void testThatCreateInputPromotionalPriceHandledCorretly() {
+    public void testingThatCreateInputPromotionalPriceHandledCorretly() {
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> shop.create('C', 1, 12., -2.));
@@ -66,14 +58,11 @@ public class CreateTest {
     }
 
     @Test
-    public void testThatCreateInputNonUniqueNameHandledCorretly() {
+    public void testingThatCreateInputNonUniqueNameHandledCorretly() {
         shop.create('A', 1, 1, 2);
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> shop.create('A', 0, 1.34, 2.12));
     }
-
-
-
 
 }
